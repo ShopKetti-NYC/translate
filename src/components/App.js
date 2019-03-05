@@ -1,40 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import Speech from "speak-tts"
-
-const API_KEY = "AIzaSyD3eKpJo4gNUDWXmrmXTakTd3orG2LNKDI"
-const languageOptions = [
-  {
-    name: "English",
-    code: "en",
-    speechCode: "en-US"
-  },
-  {
-    name: "Indonesian",
-    code: "id",
-    speechCode: "id-ID"
-  },
-  {
-    name: "Tagalog (Filipino)",
-    code: "tl",
-    speechCode: "fil-PH"
-  },
-  {
-    name: "Spanish",
-    code: "es",
-    speechCode: "es-MX"
-  },
-  {
-    name: "Italian",
-    code: "it",
-    speechCode: "it-IT"
-  },
-  {
-    name: "French",
-    code: "fr",
-    speechCode: "fr-FR"
-  }
-]
+import { API_KEY, languageOptions } from "../strings"
 
 const speech = new Speech() // will throw an exception if not browser supported
 if (speech.hasBrowserSupport()) {
@@ -53,10 +20,13 @@ class App extends Component {
       speechLang: "en-US",
       autoSpeak: true
     }
+    // Bind functions to make state available
     this.translate = this.translate.bind(this)
     this.speak = this.speak.bind(this)
     this.changeAutoSpeak = this.changeAutoSpeak.bind(this)
   }
+
+  // Perform translation and set state values
   translate() {
     axios
       .get(
@@ -76,6 +46,8 @@ class App extends Component {
         console.log("error")
       })
   }
+
+  // Handle the language selector
   setLanguage(e) {
     this.setState({
       target: e.target.value,
@@ -85,9 +57,13 @@ class App extends Component {
     speech.setLanguage(this.state.speechLang)
     //this.translate()
   }
+
+  // Handle the clicked speech event
   speak() {
     speech.speak({ text: this.state.translated })
   }
+
+  // Handle the AutoSpeak change
   changeAutoSpeak() {
     if (this.state.autoSpeak)
       this.setState({
@@ -98,16 +74,20 @@ class App extends Component {
         autoSpeak: true
       })
   }
+
+  // Set initiate speech on component mount
   componentDidMount() {
     speech.init({
       volume: 1,
       lang: this.state.speechLang,
       rate: 1,
-      pitch: 5,
+      pitch: 2,
       voice: "Google US English",
       splitSentences: true
     })
+    console.log(`Initialized with translation key: ${API_KEY}`)
   }
+
   render() {
     return (
       <div className='container p-5'>
