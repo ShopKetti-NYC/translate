@@ -1,5 +1,4 @@
-export const API_KEY =
-  process.env.GOOGLE_API_KEY || "AIzaSyD3eKpJo4gNUDWXmrmXTakTd3orG2LNKDI"
+export const API_KEY = process.env.GOOGLE_API_KEY || "KEYHERE"
 export const languageOptions = [
   {
     name: "English",
