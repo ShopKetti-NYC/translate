@@ -1,33 +1,70 @@
-export const API_KEY = process.env.GOOGLE_API_KEY || "<key_here>"
+export const API_KEY =
+  process.env.GOOGLE_API_KEY || "AIzaSyD3eKpJo4gNUDWXmrmXTakTd3orG2LNKDI"
 export const languageOptions = [
   {
     name: "English",
     code: "en",
-    speechCode: "en-US"
+    speechCode: "en-US",
+    voice: "Google US English"
   },
   {
     name: "Indonesian",
     code: "id",
-    speechCode: "id-ID"
+    speechCode: "id-ID",
+    voice: "Google US English"
   },
   {
     name: "Tagalog (Filipino)",
     code: "tl",
-    speechCode: "fil-PH"
+    speechCode: "fil-PH",
+    voice: "Google US English"
   },
   {
     name: "Spanish",
     code: "es",
-    speechCode: "es-MX"
+    speechCode: "es-MX",
+    voice: "es-ES-Standard-A"
   },
   {
     name: "Italian",
     code: "it",
-    speechCode: "it-IT"
+    speechCode: "it-IT",
+    voice: "it-IT-Standard-A"
   },
   {
     name: "French",
     code: "fr",
-    speechCode: "fr-FR"
+    speechCode: "fr-FR",
+    voice: "fr-FR-Standard-A"
+  },
+  {
+    name: "Korean",
+    code: "ko",
+    speechCode: "ko-KR",
+    voice: "ko-KR-Standard-A"
+  },
+  {
+    name: "Japanese",
+    code: "ja",
+    speechCode: "ja-JP",
+    voice: "ja-JP-Standard-A"
+  },
+  {
+    name: "Chinese",
+    code: "zh-TW",
+    speechCode: "zh-TW",
+    voice: "Google US English"
+  },
+  {
+    name: "Taiwanese",
+    code: "th",
+    speechCode: "th-TH",
+    voice: "Google US English"
+  },
+  {
+    name: "Danish",
+    code: "da",
+    speechCode: "da-DK",
+    voice: "da-DK-Standard-A"
   }
 ]

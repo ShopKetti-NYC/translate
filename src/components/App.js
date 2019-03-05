@@ -18,7 +18,8 @@ class App extends Component {
       source: "",
       target: "en",
       speechLang: "en-US",
-      autoSpeak: true
+      autoSpeak: true,
+      voice: "Google US English"
     }
     // Bind functions to make state available
     this.translate = this.translate.bind(this)
@@ -32,14 +33,13 @@ class App extends Component {
       .get(
         `https://translation.googleapis.com/language/translate/v2?target=${
           this.state.target
-        }&key=${API_KEY}&q=${this.state.value}`
+        }&key=${API_KEY}&q=${encodeURI(this.state.value)}`
       )
       .then(data => {
         this.setState({
-          translated: data.data.data.translations[0].translatedText,
+          translated: decodeURI(data.data.data.translations[0].translatedText),
           source: data.data.data.translations[0].detectedSourceLanguage
         })
-        console.log(data.data.data.translations[0].translatedText)
         if (this.state.autoSpeak) speech.speak({ text: this.state.translated })
       })
       .catch(err => {
@@ -52,9 +52,12 @@ class App extends Component {
     this.setState({
       target: e.target.value,
       speechLang: languageOptions.find(x => x.code === e.target.value)
-        .speechCode
+        .speechCode,
+      voice: languageOptions.find(x => x.code === e.target.value).voice
     })
     speech.setLanguage(this.state.speechLang)
+    //speech.setVoice(this.state.voice) // Experimental
+    //console.log(this.state.voice)
     //this.translate()
   }
 
@@ -81,7 +84,7 @@ class App extends Component {
       volume: 1,
       lang: this.state.speechLang,
       rate: 1,
-      pitch: 2,
+      pitch: 1,
       voice: "Google US English",
       splitSentences: true
     })
