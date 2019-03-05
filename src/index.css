@@ -12,3 +12,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.connection-banner {
+  padding: 1em;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  background-color: #888;
+}
+
+.connection-state {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 1em;
+  background-color: rgb(255, 139, 6);
+  content: " ";
+  margin-left: 0.4em;
+}
