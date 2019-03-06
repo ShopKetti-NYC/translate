@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import Speech from "speak-tts"
+import { Detector } from "react-detect-offline"
 import { API_KEY, languageOptions } from "../strings"
 
 const speech = new Speech() // will throw an exception if not browser supported
@@ -19,8 +20,7 @@ class App extends Component {
       target: "en",
       speechLang: "en-US",
       autoSpeak: true,
-      voice: "Google US English",
-      connectedToNetwork: false
+      voice: "Google US English"
     }
     // Bind functions to make state available
     this.translate = this.translate.bind(this)
@@ -30,7 +30,6 @@ class App extends Component {
 
   // Perform translation and set state values
   translate() {
-    if (!this.state.connectedToNetwork) return
     axios
       .get(
         `https://translation.googleapis.com/language/translate/v2?target=${
@@ -96,38 +95,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        {!this.state.connectedToNetwork && (
-          <div className='connection-banner text-monospace bg-danger'>
-            You are not connected to the internet
-          </div>
-        )}
         <div className='container p-5'>
           <div className='d-flex align-items-center mb-3'>
             <h6 className='m-0 p-0'>Translation Experiment</h6>
-            <div className='ml-auto d-flex align-items-center'>
-              <small className='text-muted'>Network status</small>
-              <span className='connection-state bg-danger' />
-            </div>
           </div>
           <textarea
-            className={
-              this.state.connectedToNetwork
-                ? "form-control mb-2"
-                : "form-control mb-2 disabled"
-            }
+            className='form-control mb-2'
             placeholder='Write something here...'
             value={this.state.value}
             onChange={e => this.setState({ value: e.target.value })}
           />
           <div className='d-flex align-items-center'>
-            <button
-              onClick={this.translate}
-              className={
-                this.state.connectedToNetwork
-                  ? "btn btn-primary"
-                  : "btn btn-primary disabled"
-              }
-            >
+            <button onClick={this.translate} className='btn btn-primary'>
               Translate
             </button>
             <select

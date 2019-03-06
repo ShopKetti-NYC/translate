@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.8.3",
+    "react-detect-offline": "^2.1.2",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
     "react-sound": "^1.2.0",
